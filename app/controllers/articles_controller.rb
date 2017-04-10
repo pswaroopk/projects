@@ -1,9 +1,8 @@
 class ArticlesController < ApplicationController
 
 
-  # def create
-  #   render plain: params[:article].inspect
-  # end
+  http_basic_authenticate_with name: "dhh", password: "secret", except: [:index, :show]
+
 
   def new
     @article = Article.new
