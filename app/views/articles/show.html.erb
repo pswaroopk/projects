@@ -1,3 +1,7 @@
+<p id=img>
+	<%= image_tag @article.id,:width => '200' %>
+</p>
+
 <p>
   <strong>Title:</strong>
   <%= @article.title %>
@@ -8,11 +12,27 @@
   <%= @article.text %>
 </p>
 
+<% if @comment && @comment.errors.any? %>
+	<div id="errors">
+		<h2>
+			<%= pluralize(@comment.errors.count, "error") %> prohibited
+			this comment from being saved:
+		</h2>
+		<ul>
+			<% @comment.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>
+
 <h2>Comments</h2>
 <%= render @article.comments %>
 
 <h2>Add a comment:</h2>
 <%= render 'comments/form' %>
 
-<%= link_to 'Edit', edit_article_path(@article) %> |
-<%= link_to 'Back', articles_path %>
+
+
+<%= link_to 'Edit', edit_article_path(@article), class:"big button" %> |
+<%= link_to 'Back', articles_path, class:"big button" %>
